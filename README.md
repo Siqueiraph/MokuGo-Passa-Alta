@@ -1,7 +1,7 @@
-# Moku:Go - Guia de Sobrevivência e Engenharia de Bancada
+# Moku:Go - Aprendendo a operar a partir de um Filtro Passa Alta
 **Documentação de Solução de Problemas: Infraestrutura, API e Processamento de Sinais**
 
-Este documento mapeia os gargalos físicos e lógicos enfrentados na integração entre Python, SciPy e o hardware Moku:Go (Liquid Instruments), desde a camada de rede até a otimização matemática do Diagrama de Bode.
+Este documento - Gerado por IA - mapeia os gargalos físicos e lógicos enfrentados na integração entre Python, SciPy e o hardware Moku:Go (Liquid Instruments), desde a camada de rede até a otimização matemática do Diagrama de Bode.
 
 ---
 
@@ -51,7 +51,7 @@ Este documento mapeia os gargalos físicos e lógicos enfrentados na integraçã
 
 ### 3.1. Quantização Digital vs. Modo Estrito (Erro `InvalidParameterException / Coerced Value`)
 *   **O Problema:** Ao definir ciclos de aquisição (`averaging_cycles`), a teoria pode exigir, por exemplo, 0.2000000000 segundos. Contudo, o relógio digital (clock) do FPGA fatiará o tempo de forma finita, arredondando o valor para 0.1999999998 segundos. No modo restrito, a API do Python percebe a diferença microscópica de tempo e aborta a execução por segurança.
-*   **A Solução:** Inserir a flag de acordo de hardware `strict=False` no método `set_sweep()`. Isso autoriza o Moku a fazer os arredondamentos termodinâmicos/digitais necessários para executar a varredura sem travar o script.
+*   **A Solução:** Inserir a flag de acordo de hardware `strict=False` no método `set_sweep()`. Isso autoriza o Moku a fazer os arredondamentos necessários para executar a varredura sem travar o script.
 
 ### 3.2. Referência Relativa e as Falsas Descontinuidades de Fase
 *   **O Problema:** Extrair a fase usando apenas o Canal 2 plota o atraso de forma absoluta contra o oscilador do próprio Moku, estragando o comportamento teórico do filtro em altas frequências. Além disso, instrumentos de bancada limitam a medição de fase ao intervalo cíclico de -180° a +180°. Se um sinal cruzar esse limite durante a varredura, o gráfico apresentará um salto violento e falso de 360°, arruinando a curva.
