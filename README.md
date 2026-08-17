@@ -8,8 +8,9 @@ Este documento - gerado por IA - mapeia os gargalos físicos e lógicos enfrenta
 ## 1. Infraestrutura e Conectividade (Camada Física e Rede)
 
 ### 1.1. Falha de DHCP e Endereço APIPA (O Erro de "Falha Geral")
-*   **O Problema:** Ao conectar o PC ao Moku:Go (via Wi-Fi ou cabo), o Windows falha no handshake DHCP e entra em pânico, atribuindo à placa de rede um IP aleatório de Autoconfiguração (APIPA), geralmente `169.254.x.x`. Como o Moku:Go está travado em `192.168.73.1`, o Python não encontra rota de rede e lança erros de Timeout ou "Falha Geral".
-*   **A Solução:** Assumir o controle manual da placa de rede.
+*   **O Problema:** Ao conectar o PC ao Moku:Go via cabo, o Windows falha no handshake DHCP e entra em pânico, atribuindo à placa de rede um IP aleatório de Autoconfiguração (APIPA), geralmente `169.254.x.x`. Como o Moku:Go está travado em `192.168.73.1`, o Python não encontra rota de rede e lança erros de Timeout ou "Falha Geral".
+*   **Solução 1 :** Usar conexão via Wi-Fi.
+*   **Solução 2:** Assumir o controle manual da placa de rede.
     1. Executar `ncpa.cpl` no Windows.
     2. Nas propriedades do Adaptador (IPv4), definir IP Estático:
        * **IP:** `192.168.73.2`
